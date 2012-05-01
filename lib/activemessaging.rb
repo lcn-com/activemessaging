@@ -60,7 +60,7 @@ module ActiveMessaging
 
   def self.load_processors(first=true)
     #Load the parent processor.rb, then all child processor classes
-    logger.debug "ActiveMessaging: Loading #{APP_ROOT + '/app/processors/application.rb'}" if first
+    logger.debug "ActiveMessaging: Loading #{APP_ROOT}/app/processors/application.rb" if first
     load "#{APP_ROOT}/app/processors/application.rb" if File.exist?("#{APP_ROOT}/app/processors/application.rb")
     Dir["#{APP_ROOT}/app/processors/*.rb"].each do |f|
       unless f.match(/\/application.rb/)
