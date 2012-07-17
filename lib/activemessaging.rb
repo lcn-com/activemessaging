@@ -7,12 +7,12 @@ module ActiveMessaging
   class StopProcessingException < Interrupt #:nodoc:
   end
 
-  # Used to indicate that the processing on a message should cease, 
+  # Used to indicate that the processing on a message should cease,
   # and the message should be returned back to the broker as best it can be
   class AbortMessageException < Exception #:nodoc:
   end
 
-  # Used to indicate that the processing on a message should cease, 
+  # Used to indicate that the processing on a message should cease,
   # but no further action is required
   class StopFilterException < Exception #:nodoc:
   end
@@ -36,8 +36,8 @@ module ActiveMessaging
     require 'activemessaging/filter'
     require 'activemessaging/trace_filter'
 
-    # load all under the adapters dir 
-    Dir[File.join(ROOT, 'lib', 'activemessaging', 'adapters', '*.rb')].each do |a| 
+    # load all under the adapters dir
+    Dir[File.join(ROOT, 'lib', 'activemessaging', 'adapters', '*.rb')].each do |a|
       begin
         adapter_name = File.basename(a, ".rb")
         require 'activemessaging/adapters/' + adapter_name
@@ -89,7 +89,7 @@ module ActiveMessaging
 
   def self.start
     if ActiveMessaging::Gateway.subscriptions.empty?
-      err_msg = <<EOM   
+      err_msg = <<EOM
 
 ActiveMessaging Error: No subscriptions.
 If you have no processor classes in app/processors, add them using the command:
@@ -116,7 +116,7 @@ ActiveMessaging.load_activemessaging
 # reload these on each Rails request - leveraging Dispatcher semantics for consistency
 if defined? Rails
   ActiveMessaging.logger.info "Rails available: Adding dispatcher prepare callback."
-  ActionDispatch::Callbacks.to_prepare :activemessaging do
+  ActionDispatch::Callbacks.to_prepare do
     ActiveMessaging.reload_activemessaging
   end
 end
